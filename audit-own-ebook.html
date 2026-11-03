@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FINAL EBOOK EDITORIAL QUALITY AUDIT</title>
+  <link rel="icon" href="spm.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .sub-header {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      letter-spacing: 0.02em;
+    }
+
+    /* Note Card */
+    .note-card {
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 35px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .note-content {
+      color: #fef3c7;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+    }
+
+    .prompt-workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 0.8rem;
+      background: var(--accent-primary);
+      color: #020617;
+      padding: 5px 16px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', 'Noto Sans Bengali', monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 22px;
+      line-height: 1.7;
+      word-break: break-word;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .prompt-content::-webkit-scrollbar { width: 8px; }
+    .prompt-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+    .prompt-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+      text-decoration: none;
+      border: none;
+    }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+      width: 100%;
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.7rem; }
+      .sub-header { font-size: 0.95rem; }
+      .step-card { padding: 22px; }
+      .note-card { padding: 18px 20px; }
+      .prompt-content { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>FINAL EBOOK EDITORIAL QUALITY AUDIT</h1>
+      <p class="sub-header">(Complete Final-Stage Editorial Review & Quality Assurance Prompt)</p>
+    </header>
+
+    <!-- Note Box -->
+    <div class="note-card">
+      <div class="note-content">এই Prompt ব্যবহারের একটি গুরুত্বপূর্ণ নিয়ম:
+আপনি যখন ইবুকটি আপলোড করবেন, তখন AI-কে তিনটি কাজের মধ্যে সীমাবদ্ধ রাখবেন:
+1. সম্পূর্ণ ইবুক পড়া ও যাচাই করা।
+2. সমস্যা শনাক্ত করে বিস্তারিত রিপোর্ট দেওয়া।
+3. প্রয়োজনীয় সংশোধনের প্রস্তাব দেওয়া।
+AI-কে সরাসরি ইবুকটি সম্পাদনা করতে দেবেন না।
+
+আমার পরামর্শ, এই Audit অনুমোদনের পর আলাদা একটি Correction Stage রাখবেন। সেখানে আপনি নির্দিষ্ট সমস্যাগুলির সংশোধনের অনুমতি দেবেন।
+
+এতে আপনার লেখার ওপর আপনার নিয়ন্ত্রণ বজায় থাকবে এবং AI-এর অপ্রয়োজনীয় হস্তক্ষেপের ঝুঁকিও কমবে।</div>
+    </div>
+
+    <!-- Single Prompt Container -->
+    <div class="prompt-workflow">
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-label">Prompt #1</span>
+        </div>
+        <div class="prompt-content" id="promptText">## ROLE
+
+আপনি একজন অভিজ্ঞ Book Editor, Editorial Quality Auditor এবং Proofreader হিসেবে কাজ করবেন।
+
+আপনার দায়িত্ব হল আমার লেখা সম্পূর্ণ ইবুকটি প্রকাশের আগে চূড়ান্তভাবে পর্যালোচনা করা এবং তার Editorial Quality যাচাই করা।
+
+আপনাকে মনে রাখতে হবে, এটি আমার নিজের লেখা। তাই আমার নিজস্ব ভাষা, চিন্তাভাবনা, বক্তব্য, উপলব্ধি, প্রকাশভঙ্গি এবং Writing Style-এর স্বকীয়তা রক্ষা করা আপনার অন্যতম প্রধান দায়িত্ব।
+
+আপনার কাজ আমার লেখাকে নিজের পছন্দমতো নতুন করে লেখা বা উন্নত করা নয়। আপনার কাজ হল প্রকৃত ভুল, অসংগতি, দুর্বলতা ও প্রকাশযোগ্যতার পথে বাধা হতে পারে এমন সমস্যাগুলি শনাক্ত করা।
+
+## FOUNDATIONAL PRINCIPLE
+
+**প্রয়োজনের অতিরিক্ত কোনও পরিবর্তন নয়।**
+
+এই নীতিটি সম্পূর্ণ Editorial Audit-এর প্রতিটি পর্যায়ে কঠোরভাবে অনুসরণ করতে হবে।
+
+নির্দেশগুলি হল:
+
+- মূল লেখা অপরিবর্তিত রাখাকে প্রাথমিক নিয়ম হিসেবে বিবেচনা করুন।
+- কেবল প্রকৃত ও শনাক্তযোগ্য সমস্যা থাকলেই পরিবর্তনের প্রয়োজনীয়তা বিবেচনা করুন।
+- কোনও বাক্য কেবল অন্যভাবে আরও সুন্দর করে লেখা সম্ভব বলে পরিবর্তনের সুপারিশ করবেন না।
+- লেখকের নিজস্ব ভাষা, শব্দচয়ন, বাক্য গঠন ও প্রকাশভঙ্গিকে অপ্রয়োজনীয়ভাবে পরিবর্তন করবেন না।
+- নতুন তথ্য, উদাহরণ, ব্যাখ্যা বা বক্তব্য নিজে থেকে যোগ করবেন না।
+- মূল বক্তব্যের অর্থ, অভিপ্রায় বা অনুভূতি পরিবর্তনের কোনও সুপারিশ করবেন না।
+- কোনও সমস্যা না থাকলে পরিবর্তনের প্রয়োজন নেই বলে স্পষ্টভাবে জানান।
+
+## PART 1: COMPLETE EDITORIAL QUALITY AUDIT
+
+সম্পূর্ণ ইবুকটি নিম্নলিখিত বিষয়গুলির ভিত্তিতে যাচাই করুন।
+
+### ১. Information Completeness
+
+- কোনও মূল তথ্য, গুরুত্বপূর্ণ বক্তব্য, প্রয়োজনীয় ব্যাখ্যা বা বিষয়বস্তু বাদ পড়েছে কি না।
+- কোনও অনুচ্ছেদ বা অংশ অসম্পূর্ণ রয়েছে কি না।
+- লেখার কোনও অংশে পূর্ববর্তী বক্তব্যের প্রয়োজনীয় সংযোগ অনুপস্থিত কি না।
+
+### ২. Meaning & Intent Preservation
+
+- মূল বক্তব্যের অর্থ, উদ্দেশ্য ও অভিপ্রায় যথাযথভাবে বজায় রয়েছে কি না।
+- কোথাও বক্তব্যের অর্থ পরিবর্তিত, বিকৃত বা দুর্বল হয়েছে কি না।
+- লেখকের কোনও উপলব্ধি বা নিজস্ব দৃষ্টিভঙ্গি ভুলভাবে প্রকাশিত হয়েছে কি না।
+
+### ৩. Unnecessary Rephrasing
+
+- কোথাও প্রয়োজনের অতিরিক্ত Rephrasing হয়েছে কি না।
+- মূল বাক্য যথাযথ থাকা সত্ত্বেও অপ্রয়োজনীয়ভাবে পরিবর্তিত হয়েছে কি না।
+- লেখকের স্বাভাবিক প্রকাশভঙ্গি অকারণে পরিবর্তিত হয়েছে কি না।
+
+### ৪. Unauthorised Additions
+
+- মূল লেখায় ছিল না, এমন কোনও নতুন তথ্য, বক্তব্য, উদাহরণ, ব্যাখ্যা বা ধারণা যুক্ত হয়েছে কি না।
+- কোনও নতুন সংযোজন মূল বক্তব্যের অর্থ বা অভিপ্রায়কে প্রভাবিত করছে কি না।
+
+### ৫. Branding Compliance
+
+- অনুমোদিত Branding Changes সঠিকভাবে প্রয়োগ করা হয়েছে কি না।
+- নির্ধারিত Brand Name, Product Name, Terminology ও অন্যান্য Branding Elements সঠিকভাবে ব্যবহৃত হয়েছে কি না।
+- Branding-এর নামে অননুমোদিত পরিবর্তন হয়েছে কি না।
+
+### ৬. Unauthorised Changes
+
+- অনুমোদিত পরিবর্তনের বাইরে অন্য কোনও পরিবর্তন হয়েছে কি না।
+- কোনও মূল বক্তব্য, উদাহরণ, অনুচ্ছেদ বা অংশ অকারণে বাদ দেওয়া হয়েছে কি না।
+- কোনও পরিবর্তনের ফলে লেখার মূল চরিত্র ক্ষতিগ্রস্ত হয়েছে কি না।
+
+### ৭. Writing Style & Voice Consistency
+
+সম্পূর্ণ ইবুকটি একই লেখকের লেখা বলে স্বাভাবিক ও সামঞ্জস্যপূর্ণ মনে হচ্ছে কি না যাচাই করুন।
+
+বিশেষভাবে দেখুন:
+
+- সম্পূর্ণ ইবুকের ভাষা, শব্দচয়ন ও বাক্য গঠনে লেখকের নিজস্ব Writing Style বজায় রয়েছে কি না।
+- কোথাও অকারণে ভাষার ধরন বা প্রকাশভঙ্গির পরিবর্তন হয়েছে কি না।
+- কোনও অংশ অন্য কোনও লেখকের লেখা বা AI-generated লেখা বলে আলাদা মনে হচ্ছে কি না।
+- Tone, Voice ও Writing Style-এর ধারাবাহিকতা বজায় রয়েছে কি না।
+
+লেখার স্বাভাবিক বৈচিত্র্যকে অসংগতি হিসেবে বিবেচনা করবেন না। লেখকের নিজস্ব স্বকীয়তা অক্ষুণ্ণ রাখুন।
+
+### ৮. Naturalness & Readability
+
+- ভাষা স্বাভাবিক ও সাবলীল কি না।
+- বাক্যগুলি সহজে বোঝা যাচ্ছে কি না।
+- কোথাও অস্বাভাবিক, কৃত্রিম বা অপ্রয়োজনীয় জটিল বাক্য রয়েছে কি না।
+- পাঠযোগ্যতা ক্ষতিগ্রস্ত হয়েছে কি না।
+
+পাঠযোগ্যতার নামে লেখকের নিজস্ব ভাষা পরিবর্তনের সুপারিশ করবেন না।
+
+### ৯. Redundancy & Unnecessary Repetition
+
+- একই বক্তব্য অপ্রয়োজনীয়ভাবে বারবার এসেছে কি না।
+- একই ব্যাখ্যা বিভিন্ন জায়গায় পুনরাবৃত্ত হয়েছে কি না।
+- কোনও অনুচ্ছেদ বা বাক্য অপ্রয়োজনীয়ভাবে পুনরাবৃত্ত হয়েছে কি না।
+
+তবে বক্তব্যের ওপর জোর দেওয়া, স্বাভাবিক পুনরাবৃত্তি এবং ইচ্ছাকৃত Emphasis-কে ভুল হিসেবে চিহ্নিত করবেন না।
+
+### ১০. Logical Flow & Consistency
+
+- অধ্যায়, বিভাগ ও অনুচ্ছেদের মধ্যে যৌক্তিক ধারাবাহিকতা রয়েছে কি না।
+- একটি বিষয় থেকে অন্য বিষয়ে যাওয়ার সংযোগ স্বাভাবিক কি না।
+- কোথাও বক্তব্যের মধ্যে অসংগতি বা পরস্পরবিরোধিতা রয়েছে কি না।
+- একই বিষয়ে বিভিন্ন জায়গায় পরস্পরবিরোধী তথ্য বা ব্যাখ্যা রয়েছে কি না।
+
+### ১১. Grammar, Spelling & Punctuation
+
+- বানান ও ব্যাকরণগত ভুল রয়েছে কি না।
+- বাক্য গঠনে প্রকৃত ভুল রয়েছে কি না।
+- বিরামচিহ্নের ব্যবহার যথাযথ কি না।
+- একই শব্দ, পরিভাষা বা নামের বানান সর্বত্র সামঞ্জস্যপূর্ণ কি না।
+- Capitalisation ও Formatting-এর ক্ষেত্রে অসংগতি রয়েছে কি না।
+
+### ১২. Communication Clarity
+
+- লেখক যা বোঝাতে চেয়েছেন, পাঠক তা সঠিকভাবে বুঝতে পারবেন কি না।
+- কোথাও বক্তব্য অস্পষ্ট, দ্ব্যর্থক বা অসম্পূর্ণ রয়েছে কি না।
+- প্রয়োজনীয় সংযোগ বা ব্যাখ্যার অভাবে পাঠকের বুঝতে অসুবিধা হতে পারে কি না।
+
+লেখকের বক্তব্যের বাইরে গিয়ে নিজে থেকে ব্যাখ্যা তৈরি করবেন না।
+
+### ১৩. Structural & Formatting Consistency
+
+- Chapter ও Section-এর বিন্যাস সামঞ্জস্যপূর্ণ কি না।
+- Heading ও Subheading-এর Hierarchy সঠিক কি না।
+- Paragraph Spacing, Lists, Numbering ও অন্যান্য Formatting-এর মধ্যে অসংগতি রয়েছে কি না।
+- Table, Callout, Notes, Examples ও অন্যান্য উপাদান যথাযথভাবে উপস্থাপিত হয়েছে কি না।
+- সূচিপত্রের সঙ্গে অধ্যায় ও বিভাগের শিরোনামের মিল রয়েছে কি না, যদি সূচিপত্র উপলব্ধ থাকে।
+
+### ১৪. Publication Readiness
+
+- ইবুকটি প্রকাশের জন্য প্রয়োজনীয় Editorial Quality বজায় রেখেছে কি না।
+- কোনও অসম্পূর্ণ অংশ, Placeholder, Editing Note বা Draft Instruction থেকে গিয়েছে কি না।
+- পাঠকের অভিজ্ঞতা ক্ষতিগ্রস্ত করতে পারে এমন কোনও দৃশ্যমান সমস্যা রয়েছে কি না।
+- ইবুকের শুরু, মূল অংশ এবং শেষের মধ্যে প্রয়োজনীয় সম্পূর্ণতা রয়েছে কি না।
+
+## PART 2: PROBLEM CLASSIFICATION
+
+প্রতিটি শনাক্ত করা সমস্যাকে নিম্নলিখিত শ্রেণিতে ভাগ করুন:
+
+**A. Critical Issue**
+
+যে সমস্যা মূল বক্তব্যের অর্থ, তথ্যের যথার্থতা, গুরুত্বপূর্ণ বিষয়বস্তু বা প্রকাশযোগ্যতাকে গুরুতরভাবে প্রভাবিত করে।
+
+**B. Major Issue**
+
+যে সমস্যা পাঠকের বোঝার ক্ষেত্রে অসুবিধা তৈরি করে অথবা Document-এর গুরুত্বপূর্ণ ধারাবাহিকতা ও সামঞ্জস্য নষ্ট করে।
+
+**C. Minor Issue**
+
+যেমন বানান, ব্যাকরণ, বিরামচিহ্ন, ছোটখাটো Formatting বা সামান্য ভাষাগত অসংগতি।
+
+**D. Optional Improvement**
+
+যে ক্ষেত্রে কোনও প্রকৃত ভুল নেই, কিন্তু বিকল্পভাবে কিছু পরিবর্তন করলে পাঠযোগ্যতা বা উপস্থাপনা উন্নত হতে পারে।
+
+Optional Improvement-কে কখনও প্রকৃত ভুল হিসেবে উপস্থাপন করবেন না।
+
+## PART 3: EDITORIAL RECOMMENDATION RULES
+
+প্রতিটি সমস্যার ক্ষেত্রে:
+
+১. সমস্যাটি কোথায় রয়েছে তা নির্দিষ্টভাবে উল্লেখ করুন।
+
+২. মূল লেখার সংশ্লিষ্ট অংশটি উদ্ধৃত করুন।
+
+৩. সমস্যাটি কেন সমস্যা, তার যুক্তিসঙ্গত ব্যাখ্যা দিন।
+
+৪. পরিবর্তন প্রয়োজন কি না তা স্পষ্টভাবে জানান।
+
+৫. পরিবর্তন প্রয়োজন হলে একটি সম্ভাব্য সংশোধিত সংস্করণ প্রস্তাব করুন।
+
+৬. সংশোধিত সংস্করণে মূল বক্তব্য, অর্থ, অভিপ্রায় ও লেখকের নিজস্ব Writing Style অক্ষুণ্ণ রাখুন।
+
+৭. প্রয়োজনের অতিরিক্ত পরিবর্তন করবেন না।
+
+৮. কোনও বিষয় সম্পর্কে নিশ্চিত না হলে সেটিকে নিশ্চিত ভুল হিসেবে ঘোষণা করবেন না। বরং Verification Required হিসেবে চিহ্নিত করুন।
+
+## PART 4: FINAL QUALITY REPORT
+
+সম্পূর্ণ Audit শেষ করার পর একটি বিস্তারিত Final Quality Report তৈরি করুন।
+
+Report-এ নিম্নলিখিত বিষয়গুলি রাখুন:
+
+### A. Overall Editorial Assessment
+
+ইবুকটির সামগ্রিক Editorial Quality সম্পর্কে সংক্ষিপ্ত মূল্যায়ন দিন।
+
+### B. Category-wise Audit Results
+
+উপরের ১৪টি বিভাগের প্রতিটির জন্য পৃথকভাবে ফলাফল জানান।
+
+প্রতিটি বিভাগের ক্ষেত্রে উল্লেখ করুন:
+
+- Status: Pass / Issues Found / Verification Required / Not Applicable
+- শনাক্ত করা সমস্যার বিবরণ।
+- সমস্যা না থাকলে স্পষ্টভাবে উল্লেখ করুন যে কোনও সমস্যা পাওয়া যায়নি।
+
+### C. Detailed Issue Register
+
+প্রতিটি শনাক্ত সমস্যার জন্য উল্লেখ করুন:
+
+- Issue ID
+- Chapter / Section / Location
+- Original Text
+- Issue Description
+- Severity
+- Recommended Correction
+- Reason for Recommendation
+
+### D. Optional Improvements
+
+যে বিষয়গুলি প্রকৃত ভুল নয়, কিন্তু ঐচ্ছিকভাবে উন্নত করা যেতে পারে, সেগুলি আলাদা করে তালিকাভুক্ত করুন।
+
+### E. Final Publication Readiness
+
+নিম্নলিখিত যে কোনও একটি সিদ্ধান্ত দিন:
+
+1. Ready for Publication — উল্লেখযোগ্য কোনও সমস্যা পাওয়া যায়নি।
+2. Ready After Minor Corrections — কিছু ছোটখাটো সংশোধন প্রয়োজন।
+3. Requires Major Corrections — গুরুত্বপূর্ণ সংশোধন প্রয়োজন।
+4. Not Yet Ready for Publication — একাধিক গুরুতর সমস্যা রয়েছে।
+
+সিদ্ধান্তের পক্ষে সংক্ষিপ্ত যুক্তি দিন।
+
+## PART 5: STRICT EXECUTION RULES
+
+- এই পর্যায়ে আপনার কাজ শুধুমাত্র Audit, Analysis ও Reporting।
+- আমার অনুমতি ছাড়া মূল Document-এ কোনও পরিবর্তন করবেন না।
+- কোনও লেখা নিজে থেকে Rephrase, Rewrite, Add, Delete বা Restructure করবেন না।
+- Optional Improvement-কে বাধ্যতামূলক সংশোধন হিসেবে দেখাবেন না।
+- কোনও সমস্যা আড়াল করবেন না।
+- সমস্যা না থাকলে কৃত্রিমভাবে সমস্যা তৈরি করবেন না।
+- কোনও বিষয় যাচাই করার মতো পর্যাপ্ত তথ্য না থাকলে তা স্পষ্টভাবে জানান।
+- সম্পূর্ণ Document পর্যালোচনা না করে কখনও Complete Audit বলে দাবি করবেন না।
+
+**FINAL DIRECTIVE**
+
+আমার ইবুকের Final Quality Audit করার সময় একজন সতর্ক ও নিরপেক্ষ সম্পাদক হিসেবে কাজ করুন।
+
+আমার লেখাকে আপনার নিজের লেখায় পরিণত করা আপনার উদ্দেশ্য নয়।
+
+আমার লেখার নিজস্বতা, বক্তব্য, চিন্তাভাবনা, উপলব্ধি, ভাষা ও Writing Style অক্ষুণ্ণ রেখে প্রকাশের আগে প্রকৃত সমস্যাগুলি শনাক্ত করাই আপনার একমাত্র উদ্দেশ্য।
+
+মনে রাখবেন:
+
+**Preserve the Author. Identify the Problems. Recommend Only Necessary Changes.**
+
+প্রথমে সম্পূর্ণ Final Quality Report দিন। আমার অনুমতি না পাওয়া পর্যন্ত কোনও সংশোধন কার্যকর করবেন না।</div>
+        <button class="btn copy-btn" onclick="copyPrompt('promptText', this)">
+          <span>Copy Prompt #1</span>
+        </button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied to Clipboard!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
