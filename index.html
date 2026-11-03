@@ -76,6 +76,7 @@
       gap: 12px;
       align-items: center;
       backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
     }
 
     .single-input {
@@ -110,30 +111,6 @@
     .reset-btn:hover {
       background: var(--accent-danger);
       color: #fff;
-    }
-
-    /* Sections */
-    .section-block {
-      margin-bottom: 40px;
-    }
-
-    .section-heading {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .section-heading::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--card-border);
     }
 
     .prompt-workflow {
@@ -178,7 +155,7 @@
       font-size: 0.95rem;
       color: #cbd5e1;
       white-space: pre-wrap;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       margin-bottom: 20px;
       line-height: 1.6;
       word-break: break-all;
@@ -188,7 +165,7 @@
     }
 
     .prompt-content::-webkit-scrollbar { width: 8px; }
-    .prompt-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+    .prompt-content::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
     .prompt-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
 
     .btn-group {
@@ -227,7 +204,7 @@
     .copy-btn.copied {
       background: var(--accent-success);
       border-color: var(--accent-success);
-      color: white;
+      color: #fff;
     }
 
     .link-btn {
@@ -271,13 +248,13 @@
       <p class="sub-header">(my process)</p>
     </header>
 
-    <!-- Filter input field with Reset button -->
+    <!-- Search/Filter input field with Reset button -->
     <div class="filter-wrapper">
       <input 
         type="text" 
         id="promptSearch" 
         class="single-input" 
-        placeholder="Search or filter prompts by title or file name..." 
+        placeholder="Search or filter prompts by name or link..." 
         oninput="filterPrompts(this.value)" 
       />
       <button type="button" class="reset-btn" onclick="resetInputField('promptSearch')">
@@ -285,8 +262,8 @@
       </button>
     </div>
 
-    <!-- Sections & Prompts Container -->
-    <div id="sectionsContainer">
+    <!-- Prompts Container -->
+    <div class="prompt-workflow" id="promptsContainer">
       <!-- Injected by JavaScript -->
     </div>
 
@@ -296,81 +273,63 @@
   </div>
 
   <script>
-    const sectionsData = [
+    const promptsData = [
       {
-        sectionName: "Workflow",
-        prompts: [
-          {
-            id: 1,
-            name: "Rebrand",
-            url: "rebrand-a-plr.html",
-            text: `rebrand-a-plr.html`
-          },
-          {
-            id: 2,
-            name: "Sales Letter",
-            url: "sl-genie.html",
-            text: `sl-genie.html`
-          },
-          {
-            id: 3,
-            name: "Buy Now Button",
-            url: "bnb.html",
-            text: `bnb.html`
-          },
-          {
-            id: 4,
-            name: "Sales Page",
-            url: "sp-genie.html",
-            text: `sp-genie.html`
-          }
-        ]
+        id: 1,
+        name: "Rebrand",
+        url: "rebrand-a-plr.html",
+        text: `rebrand-a-plr.html`
+      },
+      {
+        id: 2,
+        name: "Sales Letter",
+        url: "sl-genie.html",
+        text: `sl-genie.html`
+      },
+      {
+        id: 3,
+        name: "Buy Now Button",
+        url: "bnb.html",
+        text: `bnb.html`
+      },
+      {
+        id: 4,
+        name: "Sales Page",
+        url: "sp-genie.html",
+        text: `sp-genie.html`
+      },
+      {
+        id: 5,
+        name: "Audit Own Ebook",
+        url: "audit-own-ebook.html",
+        text: `audit-own-ebook.html`
       }
     ];
 
-    function renderCards() {
-      const mainContainer = document.getElementById('sectionsContainer');
-      mainContainer.innerHTML = '';
+    function renderPrompts() {
+      const container = document.getElementById('promptsContainer');
+      container.innerHTML = '';
 
-      sectionsData.forEach(section => {
-        const sectionWrapper = document.createElement('div');
-        sectionWrapper.className = 'section-block';
-        sectionWrapper.id = `section-${section.sectionName.toLowerCase().replace(/\\s+/g, '-')}`;
+      promptsData.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'step-card';
+        card.id = `card-${p.id}`;
 
-        const heading = document.createElement('h2');
-        heading.className = 'section-heading';
-        heading.innerText = section.sectionName;
-        sectionWrapper.appendChild(heading);
-
-        const promptWorkflow = document.createElement('div');
-        promptWorkflow.className = 'prompt-workflow';
-
-        section.prompts.forEach(p => {
-          const card = document.createElement('div');
-          card.className = 'step-card';
-          card.id = `card-${p.id}`;
-          card.setAttribute('data-name', p.name.toLowerCase());
-          card.setAttribute('data-text', p.text.toLowerCase());
-
-          card.innerHTML = `
-            <div class="step-header">
-              <span class="step-label">${p.name}</span>
-            </div>
-            <div class="prompt-content" id="p${p.id}">${p.text}</div>
-            <div class="btn-group">
-              <button class="btn copy-btn" onclick="copyText('p${p.id}', this)">
-                <span>Copy Prompt</span>
-              </button>
-              <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="btn link-btn">
-                <span>Open Link</span>
-              </a>
-            </div>
-          `;
-          promptWorkflow.appendChild(card);
-        });
-
-        sectionWrapper.appendChild(promptWorkflow);
-        mainContainer.appendChild(sectionWrapper);
+        card.innerHTML = `
+          <div class="step-header">
+            <span class="step-label">${p.name}</span>
+          </div>
+          <div class="prompt-content" id="p${p.id}">${p.text}</div>
+          <div class="btn-group">
+            <button type="button" class="btn copy-btn" onclick="copyText('p${p.id}', this)">
+              <span>Copy Prompt #${p.id}</span>
+            </button>
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="btn link-btn">
+              <span>Open Link</span>
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
       });
     }
 
@@ -380,16 +339,15 @@
       const text = element.innerText;
 
       navigator.clipboard.writeText(text).then(() => {
-        const originalText = btn.innerHTML;
+        const originalHtml = btn.innerHTML;
         btn.innerHTML = `<span>Copied to Clipboard!</span>`;
         btn.classList.add('copied');
 
         setTimeout(() => {
-          btn.innerHTML = originalText;
+          btn.innerHTML = originalHtml;
           btn.classList.remove('copied');
         }, 2000);
       }).catch(() => {
-        // Fallback for older browsers
         const textarea = document.createElement('textarea');
         textarea.value = text;
         document.body.appendChild(textarea);
@@ -397,12 +355,12 @@
         document.execCommand('copy');
         document.body.removeChild(textarea);
 
-        const originalText = btn.innerHTML;
+        const originalHtml = btn.innerHTML;
         btn.innerHTML = `<span>Copied to Clipboard!</span>`;
         btn.classList.add('copied');
 
         setTimeout(() => {
-          btn.innerHTML = originalText;
+          btn.innerHTML = originalHtml;
           btn.classList.remove('copied');
         }, 2000);
       });
@@ -410,29 +368,15 @@
 
     function filterPrompts(query) {
       const q = query.toLowerCase().trim();
-      sectionsData.forEach(section => {
-        let sectionVisibleCount = 0;
-        section.prompts.forEach(p => {
-          const card = document.getElementById(`card-${p.id}`);
-          if (card) {
-            const matches = !q || p.name.toLowerCase().includes(q) || p.text.toLowerCase().includes(q);
-            if (matches) {
-              card.style.display = 'block';
-              sectionVisibleCount++;
-            } else {
-              card.style.display = 'none';
-            }
-          }
-        });
-
-        const sectionElem = document.getElementById(`section-${section.sectionName.toLowerCase().replace(/\\s+/g, '-')}`);
-        if (sectionElem) {
-          sectionElem.style.display = sectionVisibleCount > 0 ? 'block' : 'none';
+      promptsData.forEach(p => {
+        const card = document.getElementById(`card-${p.id}`);
+        if (card) {
+          const matches = !q || p.name.toLowerCase().includes(q) || p.text.toLowerCase().includes(q);
+          card.style.display = matches ? 'block' : 'none';
         }
       });
     }
 
-    // Reset button handler: clears input field and refreshes/restores all prompt boxes
     function resetInputField(fieldId) {
       const field = document.getElementById(fieldId);
       if (field) {
@@ -442,7 +386,7 @@
     }
 
     window.onload = () => {
-      renderCards();
+      renderPrompts();
     };
   </script>
 </body>
