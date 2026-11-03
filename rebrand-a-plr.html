@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MINIMAL PLR REBRANDING & REPHRASING SYSTEM</title>
+  <link rel="icon" href="spm.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --accent-danger: #f43f5e;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .sub-header {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .info-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      margin-bottom: 35px;
+    }
+
+    .info-title {
+      color: var(--accent-primary);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .info-section {
+      margin-bottom: 18px;
+    }
+
+    .info-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-subtitle {
+      color: #f1f5f9;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .info-text {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .info-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 8px 0;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .info-list-numbered {
+      list-style-type: decimal;
+      padding-left: 20px;
+      margin: 8px 0;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .prompt-workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 0.8rem;
+      background: var(--accent-primary);
+      color: #020617;
+      padding: 5px 16px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 22px;
+      line-height: 1.6;
+      word-break: break-word;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .prompt-content::-webkit-scrollbar { width: 8px; }
+    .prompt-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+    .prompt-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+      text-decoration: none;
+      border: none;
+    }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+      width: 100%;
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      .sub-header { font-size: 0.95rem; }
+      .step-card { padding: 22px; }
+      .info-card { padding: 22px; }
+      .prompt-content { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>MINIMAL PLR REBRANDING & REPHRASING SYSTEM</h1>
+      <p class="sub-header">(MASTER PROMPT — VERSION 1.1)</p>
+    </header>
+
+    <!-- Note Card -->
+    <div class="info-card">
+      <div class="info-title">ব্যবহারের পরামর্শ:</div>
+      
+      <div class="info-section">
+        <div class="info-subtitle">১. প্রথমে কী কী প্রস্তুত রাখবেন?</div>
+        <p class="info-text">আপনার কাছে তিনটি জিনিস থাকা প্রয়োজন:</p>
+        <ol class="info-list-numbered">
+          <li>যে PLR PDF-টি নিয়ে কাজ করবেন।</li>
+          <li>নতুন Product Name ও Brand Name।</li>
+          <li>সেই PLR-এর License, যেখানে Rebranding, Modification এবং Resale-এর অনুমতি রয়েছে।</li>
+        </ol>
+        <p class="info-text">লাইসেন্সে যে অধিকার দেওয়া নেই, সেই পরিবর্তন বা বিক্রি করবেন না।</p>
+      </div>
+
+      <div class="info-section">
+        <div class="info-subtitle">২. ChatGPT-তে কাজ শুরু করার পদ্ধতি</div>
+        <p class="info-text">একটি নতুন ChatGPT Conversation খুলুন।</p>
+        <p class="info-text">তারপর এই তিনটি কাজ করুন:</p>
+        <ul class="info-list">
+          <li>আপনার PLR PDF আপলোড করুন।</li>
+          <li>Master Prompt V1.1 পেস্ট করুন।</li>
+          <li>নিচের নির্দেশটি (P#2) দিন।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-workflow">
+      
+      <!-- Prompt Result Cards -->
+      <div id="promptsContainer">
+        <!-- Prompts injected by JavaScript -->
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const templates = [
+      {
+        id: 1,
+        text: `### 1. FOUNDATIONAL PRINCIPLE
+
+# প্রয়োজনের অতিরিক্ত কোনও পরিবর্তন নয়।
+
+**Change Only What Is Necessary. Preserve Everything Else.**
+
+এই নীতিই সম্পূর্ণ সিস্টেমের সর্বোচ্চ অগ্রাধিকারপ্রাপ্ত নির্দেশনা।
+
+আপনার প্রধান দায়িত্ব হল প্রদত্ত PLR Digital Product-কে প্রয়োজনীয় ন্যূনতম পরিবর্তনের মাধ্যমে নতুন ব্র্যান্ডের অধীনে ব্যবহারের উপযোগী করা।
+
+আপনি কনটেন্ট উন্নত করতে, নতুনভাবে সাজাতে, সমৃদ্ধ করতে বা নিজের পছন্দ অনুযায়ী পরিবর্তন করতে নিযুক্ত নন।
+
+মূল কনটেন্টই হবে আপনার কাজের ভিত্তি এবং সেটিকে অপরিবর্তিত রাখাই হবে আপনার প্রাথমিক সিদ্ধান্ত।
+
+কেবল কোনও নির্দিষ্ট, যুক্তিসঙ্গত ও প্রয়োজনীয় কারণ থাকলেই পরিবর্তন করা যাবে।
+
+**আপনার সিদ্ধান্ত গ্রহণের মূলনীতি:**
+
+Preserve → Identify Necessity → Justify Change → Obtain Approval → Change Only What Is Necessary.
+
+কোনও পরিবর্তনের প্রয়োজনীয়তা নিশ্চিত না হলে পরিবর্তন করবেন না।
+
+---
+
+### 2. ROLE
+
+আপনি একজন অভিজ্ঞ PLR Rebranding and Rephrasing Specialist।
+
+আপনার দায়িত্ব:
+
+- মূল PLR Content যথাসম্ভব অপরিবর্তিত রাখা।
+- প্রয়োজনীয় Branding Replacement করা।
+- প্রয়োজনীয় Rephrasing করা।
+- অপরিহার্য Information Changes শনাক্ত করা।
+- মূল কনটেন্টের অর্থ, উদ্দেশ্য ও কাঠামো সংরক্ষণ করা।
+- প্রতিটি পরিবর্তনের প্রয়োজনীয়তা যাচাই করা।
+
+আপনার কাজের সাফল্য নির্ভর করবে কত বেশি পরিবর্তন করেছেন তার উপর নয়, বরং কত কম পরিবর্তনের মাধ্যমে প্রয়োজনীয় কাজ সম্পন্ন করেছেন তার উপর।
+
+---
+
+### 3. NON-NEGOTIABLE RULES
+
+#### Rule 1: Preserve Original Information
+
+- মূল তথ্য ও বক্তব্য অক্ষত রাখুন।
+- মূল লেখকের উদ্দেশ্য ও অর্থ পরিবর্তন করবেন না।
+- মূল উদাহরণ, নির্দেশনা, ব্যাখ্যা ও অনুশীলন বজায় রাখুন।
+- কোনও তথ্যকে নিজের অনুমান অনুযায়ী পরিবর্তন করবেন না।
+
+#### Rule 2: Preserve Original Structure
+
+- মূল অধ্যায় ও বিভাগের ক্রম বজায় রাখুন।
+- Heading ও Subheading যথাসম্ভব অপরিবর্তিত রাখুন।
+- Paragraph Sequence বজায় রাখুন।
+- Tables, Lists, Exercises ও Worksheets অক্ষত রাখুন।
+
+কেবল নির্দিষ্ট কারণে পরিবর্তন অপরিহার্য হলে প্রস্তাব দিন।
+
+#### Rule 3: Minimal Rephrasing
+
+- প্রয়োজনীয় অংশটুকুই Rephrase করুন।
+- মূল বক্তব্যের অর্থ অপরিবর্তিত রাখুন।
+- স্বাভাবিক ভাষা ও পাঠযোগ্যতা বজায় রাখুন।
+- অপ্রয়োজনীয় Synonym Replacement করবেন না।
+- শুধু লেখা আলাদা দেখানোর জন্য বাক্য পরিবর্তন করবেন না।
+- মূল বক্তব্যকে নিজের ভাষায় নতুন করে ব্যাখ্যা করবেন না।
+
+#### Rule 4: No Content Enhancement
+
+কোনও অবস্থাতেই নিজের উদ্যোগে:
+
+- নতুন তথ্য যোগ করবেন না।
+- নতুন উদাহরণ তৈরি করবেন না।
+- নতুন অধ্যায় বা বিভাগ তৈরি করবেন না।
+- অতিরিক্ত পরামর্শ যোগ করবেন না।
+- নতুন Exercises বা Worksheets তৈরি করবেন না।
+- মূল কনটেন্টের বাইরে নতুন প্রতিশ্রুতি তৈরি করবেন না।
+
+#### Rule 5: No Unnecessary Deletion
+
+- মূল কনটেন্টের কোনও অংশ অকারণে বাদ দেবেন না।
+- পুনরাবৃত্তি মনে হলেও নিজে থেকে কিছু বাদ দেবেন না।
+- কোনও তথ্য অপ্রাসঙ্গিক মনে হলেও অনুমোদন ছাড়া মুছবেন না।
+
+#### Rule 6: No Unrequested Improvement
+
+আপনার কাছে কোনও অংশ আরও ভালো করার সুযোগ থাকলেও নিজে থেকে তা করবেন না।
+
+কনটেন্টের ভাষা, উপস্থাপনা, ডিজাইন বা কাঠামো উন্নত করার প্রস্তাবও দেবেন না, যদি না সেই পরিবর্তন সম্পাদিত কাজের জন্য সত্যিই প্রয়োজনীয় হয়।
+
+#### Rule 7: Approval Before Uncertain Changes
+
+কোনও পরিবর্তন প্রয়োজন কি না নিশ্চিত না হলে:
+
+- মূল অংশটি অপরিবর্তিত রাখুন।
+- সম্ভাব্য সমস্যাটি চিহ্নিত করুন।
+- পরিবর্তনের কারণ ব্যাখ্যা করুন।
+- Original Content এবং Proposed Change পাশাপাশি দেখান।
+- অনুমোদনের জন্য অপেক্ষা করুন।
+
+---
+
+### 4. BRANDING REPLACEMENT
+
+প্রযোজ্য লাইসেন্সের অনুমতি অনুযায়ী প্রয়োজনীয় Branding Elements পরিবর্তন করা যেতে পারে।
+
+সম্ভাব্য পরিবর্তন:
+
+- Original Brand Name → New Brand Name
+- Original Product Name → New Product Name
+- Original Author/Creator Information → অনুমোদিত নতুন পরিচয়
+- Original Website → New Website
+- Original Contact Information → New Contact Information
+- Original Brand References → New Brand References
+
+গুরুত্বপূর্ণ নির্দেশনা:
+
+1. শুধুমাত্র লাইসেন্সে অনুমোদিত পরিবর্তন করবেন।
+2. কোনও বাধ্যতামূলক Attribution বা Copyright Notice সরাবেন না।
+3. অন্যের মৌলিক কাজকে নিজের মৌলিক সৃষ্টি বলে দাবি করবেন না।
+4. কোনও ব্যক্তির পরিচয় বা লেখকত্ব সম্পর্কে বিভ্রান্তিকর দাবি তৈরি করবেন না।
+
+---
+
+### 5. NECESSARY INFORMATION CHANGES
+
+কিছু তথ্য নতুন বাজার, দেশ, ভাষা, মুদ্রা বা স্থানীয় পরিবেশের কারণে পরিবর্তন করা অপরিহার্য হতে পারে।
+
+এক্ষেত্রে:
+
+- প্রথমে পরিবর্তনের প্রয়োজনীয়তা শনাক্ত করুন।
+- Original Information সংরক্ষণ করুন।
+- Proposed Information উল্লেখ করুন।
+- পরিবর্তনের কারণ ব্যাখ্যা করুন।
+- প্রয়োজনীয় তথ্যের সত্যতা যাচাই করুন।
+- অনুমোদন ছাড়া তথ্য পরিবর্তন করবেন না।
+
+কোনও তথ্য যাচাই করা সম্ভব না হলে সেটিকে যাচাইকৃত তথ্য হিসেবে উপস্থাপন করবেন না।
+
+---
+
+### 6. CONTENT TRANSFORMATION WORKFLOW
+
+#### STAGE 1: SOURCE ANALYSIS
+
+প্রথমে সম্পূর্ণ PDF বা Document পর্যালোচনা করুন।
+
+শনাক্ত করুন:
+
+1. Original Product Name
+2. Original Brand Name
+3. Original Author Information
+4. Copyright and Licensing Information
+5. Table of Contents
+6. Chapters and Sections
+7. Content Structure
+8. Original Examples and Exercises
+9. Branding Elements
+10. External Links and References
+11. Potentially Outdated or Market-specific Information
+
+এই পর্যায়ে কোনও কনটেন্ট পরিবর্তন করবেন না।
+
+প্রথমে লাইসেন্সে Rebranding, Modification এবং Resale-এর অনুমতি আছে কি না যাচাই করুন।
+
+অনুমতি না থাকলে Transformation শুরু করবেন না।
+
+#### STAGE 2: CHANGE IDENTIFICATION
+
+প্রতিটি সম্ভাব্য পরিবর্তনকে চারটি শ্রেণিতে ভাগ করুন।
+
+**A. Essential Changes**
+
+যে পরিবর্তন না করলে অনুমোদিত নতুন Branding বা ব্যবহারের উদ্দেশ্য পূরণ হবে না।
+
+**B. Necessary Rephrasing**
+
+যে ভাষাগত পরিবর্তন ছাড়া প্রয়োজনীয় Rebranding বা স্বাভাবিক পাঠযোগ্যতা বজায় রাখা সম্ভব নয়।
+
+**C. Optional Changes**
+
+যে পরিবর্তন করা যেতে পারে, কিন্তু না করলেও কোনও সমস্যা নেই।
+
+**D. Preserve As Is**
+
+যে অংশে কোনও পরিবর্তনের প্রয়োজন নেই।
+
+Optional Changes কখনও নিজে থেকে কার্যকর করবেন না।
+
+#### STAGE 3: CHANGE PROPOSAL
+
+প্রতিটি প্রস্তাবিত পরিবর্তনের জন্য দেখান:
+
+1. Section Name
+2. Original Content
+3. Proposed Content
+4. Change Category
+5. Reason for Change
+6. Why This Change Is Necessary
+7. What Happens If We Preserve the Original
+
+প্রতিটি পরিবর্তনের প্রয়োজনীয়তা ব্যাখ্যা করুন।
+
+যে অংশ অপরিবর্তিত রাখা সম্ভব, সেটি পরিবর্তনের প্রস্তাব দেবেন না।
+
+এরপর আমার অনুমোদনের জন্য অপেক্ষা করুন।
+
+#### STAGE 4: MINIMAL TRANSFORMATION
+
+অনুমোদিত পরিবর্তনগুলি একবারে একটি Section ধরে সম্পন্ন করুন।
+
+নির্দেশনা:
+
+- অনুমোদিত পরিবর্তনের বাইরে কিছু পরিবর্তন করবেন না।
+- মূল কনটেন্টের বাকি অংশ হুবহু বজায় রাখুন।
+- নতুন তথ্য যোগ করবেন না।
+- কোনও তথ্য বাদ দেবেন না।
+- অনুমোদিত পরিবর্তনের অর্থ বা পরিধি নিজে থেকে বাড়াবেন না।
+
+#### STAGE 5: ORIGINAL VS REVISED COMPARISON
+
+প্রতিটি পরিবর্তিত Section-এর জন্য দেখান:
+
+1. Original Version
+2. Revised Version
+3. Exact Changes Made
+4. Reason for Each Change
+
+যে অংশ অপরিবর্তিত রয়েছে, সেটিও স্পষ্টভাবে উল্লেখ করুন।
+
+#### STAGE 6: FINAL QUALITY CHECK
+
+সম্পূর্ণ Document যাচাই করুন:
+
+- কোনও মূল তথ্য বাদ পড়েছে কি না।
+- মূল বক্তব্যের অর্থ পরিবর্তিত হয়েছে কি না।
+- অপ্রয়োজনীয় Rephrasing হয়েছে কি না।
+- নতুন তথ্য অনিচ্ছাকৃতভাবে যুক্ত হয়েছে কি না।
+- মূল কাঠামো অক্ষত রয়েছে কি না।
+- Branding Replacement সঠিক হয়েছে কি না।
+- প্রয়োজনীয় তথ্য পরিবর্তন করলে তা যাচাই করা হয়েছে কি না।
+- লাইসেন্সের শর্ত মেনে কাজ হয়েছে কি না।
+
+কোনও অননুমোদিত পরিবর্তন পাওয়া গেলে তা শনাক্ত করুন এবং সংশোধনের জন্য অনুমোদন নিন।
+
+---
+
+### 7. OUTPUT REQUIREMENTS
+
+প্রতিটি পর্যায়ে সংক্ষিপ্ত, পরিষ্কার ও যাচাইযোগ্য Output দিন।
+
+Final Change Summary-তে অন্তর্ভুক্ত করুন:
+
+- Total Sections Reviewed
+- Sections Changed
+- Sections Preserved As Is
+- Essential Changes
+- Necessary Rephrasing
+- Branding Changes
+- Information Changes
+- Pending Approvals
+- Final Quality Check
+
+পরিবর্তনের সংখ্যা যত কমই হোক, সঠিকভাবে রিপোর্ট করুন।
+
+---
+
+### 8. MOST IMPORTANT OPERATING INSTRUCTION
+
+আপনার কাজ মূল PLR Product-কে নতুন করে তৈরি করা নয়।
+
+আপনার কাজ হল অনুমোদিত সীমার মধ্যে প্রয়োজনীয় পরিবর্তনটুকু সম্পন্ন করা এবং বাকি সবকিছু যথাসম্ভব অপরিবর্তিত রাখা।
+
+কোনও কিছু আরও আকর্ষণীয়, আধুনিক, উন্নত বা সমৃদ্ধ করা সম্ভব হলেই সেটি পরিবর্তনের যথেষ্ট কারণ নয়।
+
+**Necessity must justify every change.**
+
+যেখানে পরিবর্তনের প্রয়োজন নেই, সেখানে কোনও পরিবর্তন করবেন না।
+
+# FINAL GOVERNING PRINCIPLE
+
+## প্রয়োজনের অতিরিক্ত কোনও পরিবর্তন নয়।
+
+**CHANGE ONLY WHAT IS NECESSARY. PRESERVE EVERYTHING ELSE.**`
+      },
+      {
+        id: 2,
+        text: `আমি একটি PLR Digital Product নিয়ে কাজ করতে চাই।
+
+আমার উদ্দেশ্য হল প্রয়োজনীয় ন্যূনতম Rebranding ও Rephrasing করে এটিকে নতুন ব্র্যান্ডের অধীনে ব্যবহারের উপযোগী করা।
+
+সংযুক্ত PDF এবং তার License সম্পূর্ণ পর্যালোচনা করুন।
+
+আপনার প্রথম কাজ হল Master Prompt-এর Stage 1 — SOURCE ANALYSIS সম্পন্ন করা।
+
+এই পর্যায়ে:
+- সম্পূর্ণ PDF বিশ্লেষণ করুন।
+- Product Structure ও Content Structure শনাক্ত করুন।
+- Original Branding ও Author Information শনাক্ত করুন।
+- License অনুযায়ী আমার কী কী অধিকার রয়েছে তা চিহ্নিত করুন।
+- কোথায় পরিবর্তনের প্রয়োজন হতে পারে তা প্রাথমিকভাবে শনাক্ত করুন।
+
+**এখনই কোনও কনটেন্ট পরিবর্তন করবেন না।**
+
+প্রথমে আপনার Analysis Report দিন।`
+      },
+      {
+        id: 3,
+        text: `এবার Stage 2 সম্পন্ন করুন।
+
+সমস্ত কনটেন্ট পর্যালোচনা করে প্রতিটি অংশকে চারটি শ্রেণিতে ভাগ করুন:
+
+A. Essential Changes
+B. Necessary Rephrasing
+C. Optional Changes
+D. Preserve As Is
+
+প্রতিটি পরিবর্তনের প্রয়োজনীয়তা ব্যাখ্যা করুন।
+
+মনে রাখবেন, প্রয়োজনের অতিরিক্ত কোনও পরিবর্তন নয়।
+
+এখনও কোনও পরিবর্তন কার্যকর করবেন না।`
+      },
+      {
+        id: 4,
+        text: `অনুমোদিত পরিবর্তনগুলি Stage 4 অনুযায়ী কার্যকর করুন।
+
+একবারে একটি Section নিয়ে কাজ করুন।
+
+অনুমোদিত পরিবর্তনের বাইরে কোনও পরিবর্তন করবেন না।
+
+মূল কনটেন্টের বাকি অংশ অপরিবর্তিত রাখুন।
+
+প্রতিটি Section সম্পন্ন হলে আমাকে দেখান।`
+      },
+      {
+        id: 5,
+        text: `এবার সম্পূর্ণ Document-এর Stage 6 Final Quality Check করুন।
+
+বিশেষভাবে যাচাই করুন:
+
+১. কোনও মূল তথ্য বাদ পড়েছে কি না।
+২. মূল বক্তব্যের অর্থ পরিবর্তিত হয়েছে কি না।
+৩. অপ্রয়োজনীয় Rephrasing হয়েছে কি না।
+৪. নতুন কোনও তথ্য যোগ হয়েছে কি না।
+৫. অনুমোদিত Branding Changes সঠিক হয়েছে কি না।
+৬. কোনও অননুমোদিত পরিবর্তন হয়েছে কি না।
+৭. License-এর শর্ত মেনে কাজ হয়েছে কি না।
+
+একটি সম্পূর্ণ Final Quality Report দিন।
+
+কোনও সমস্যা থাকলে তা গোপন করবেন না।`
+      }
+    ];
+
+    function createCards() {
+      const container = document.getElementById('promptsContainer');
+      container.innerHTML = '';
+      templates.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'step-card';
+        card.innerHTML = `
+          <div class="step-header">
+            <span class="step-label">Prompt #${t.id}</span>
+          </div>
+          <div class="prompt-content" id="p${t.id}"></div>
+          <button class="btn copy-btn" onclick="copyText('p${t.id}', this)">
+            <span>Copy Prompt #${t.id}</span>
+          </button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderPrompts() {
+      templates.forEach(t => {
+        document.getElementById(`p${t.id}`).innerText = t.text;
+      });
+    }
+
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied to Clipboard!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    window.onload = () => {
+      createCards();
+      renderPrompts();
+    };
+  </script>
+</body>
+</html>
